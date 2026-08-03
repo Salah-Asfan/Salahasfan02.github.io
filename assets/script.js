@@ -75,4 +75,22 @@
 
   // Footer year
   document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Count up hero stats
+  document.querySelectorAll(".hero-meta-item strong").forEach(function (el) {
+    var match = el.textContent.trim().match(/^(\d+)(\+?)$/);
+    if (!match) return;
+    var target = parseInt(match[1], 10);
+    var suffix = match[2];
+    var duration = 900;
+    var start = null;
+    function step(ts) {
+      if (!start) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      el.textContent = Math.floor(progress * target) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target + suffix;
+    }
+    requestAnimationFrame(step);
+  });
 })();

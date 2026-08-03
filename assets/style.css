@@ -7,9 +7,9 @@
   --ink-2: #4a4a5c;
   --ink-muted: #86869c;
 
-  --accent: #5b4dd6;
-  --accent-strong: #4636c2;
-  --accent-soft: rgba(91, 77, 214, 0.1);
+  --accent: #c2410c;
+  --accent-strong: #9a3412;
+  --accent-soft: rgba(194, 65, 12, 0.1);
   --accent-2: #0d9488;
 
   --shadow-sm: 0 1px 2px rgba(20, 20, 31, 0.05);
@@ -30,9 +30,9 @@
     --ink-2: #b6b6cc;
     --ink-muted: #7d7d98;
 
-    --accent: #8b7ef5;
-    --accent-strong: #a79cff;
-    --accent-soft: rgba(139, 126, 245, 0.16);
+    --accent: #fb923c;
+    --accent-strong: #fdba74;
+    --accent-soft: rgba(251, 146, 60, 0.16);
     --accent-2: #2dd4bf;
 
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
@@ -50,9 +50,9 @@
   --ink: #f1f1f8;
   --ink-2: #b6b6cc;
   --ink-muted: #7d7d98;
-  --accent: #8b7ef5;
-  --accent-strong: #a79cff;
-  --accent-soft: rgba(139, 126, 245, 0.16);
+  --accent: #fb923c;
+  --accent-strong: #fdba74;
+  --accent-soft: rgba(251, 146, 60, 0.16);
   --accent-2: #2dd4bf;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
@@ -127,6 +127,11 @@ a {
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 0 4px var(--accent-soft);
+  animation: dot-pulse 2.4s ease-in-out infinite;
+}
+@keyframes dot-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px var(--accent-soft); }
+  50% { box-shadow: 0 0 0 7px transparent; }
 }
 .nav-links {
   display: flex;
@@ -134,8 +139,26 @@ a {
   font-size: 0.9rem;
   color: var(--ink-2);
 }
+.nav-links a {
+  position: relative;
+  padding-bottom: 2px;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -2px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  transition: right 220ms ease;
+}
 .nav-links a:hover {
   color: var(--accent);
+}
+.nav-links a:hover::after {
+  right: 0;
 }
 .nav-actions {
   display: flex;
@@ -221,6 +244,11 @@ a {
   filter: blur(20px);
   z-index: -1;
   pointer-events: none;
+  animation: glow-drift 14s ease-in-out infinite;
+}
+@keyframes glow-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-30px, 40px) scale(1.12); }
 }
 .eyebrow {
   display: inline-flex;
@@ -697,5 +725,12 @@ footer a:hover {
   }
   section {
     padding: 64px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-glow,
+  .brand .dot {
+    animation: none;
   }
 }
