@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://salahasfan02.github.io/sitemap.xml
+Sitemap: https://salah-asfan.github.io/sitemap.xml
